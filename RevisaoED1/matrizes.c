@@ -1,24 +1,29 @@
-/*
-O código abaixo recebe do usuário elementos que são inseridos em uma matriz 3x3, em seguida, imprime a soma de sua diagonal principal.
-- faça uma modificação para que seja possível dinamizar o tamanho da matriz (utilizar alocação dinâmica de memória usando malloc)
-*/
-
 #include <stdio.h>
 
 int main() {
-    int matriz[3][3];
+    int linhas = 3;
+    int colunas = 3;
+    int** matriz;
     int i, j, soma = 0;
-
-    printf("Insira os elementos da matriz 3x3:\n");
+    
+    matriz = malloc(sizeof(int*) * linhas); //alocação de memória usando malloc
+    
+    for(int i = 0; i < linhas; i++) {
+        matriz[i] = malloc(sizeof(int) * colunas);
+    }
+    printf("Insira os elementos da matriz 3x3:\n"); //inserção dos elementos da matriz
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
-            scanf("%d", &matriz[i][j]);
+            scanf("%d", &matriz[i][j]); //usuário atribuindo os valores da matriz
             if (i == j) {
-                soma += matriz[i][j];
+                soma += matriz[i][j]; //soma dos elementos da diagonal principal
             }
         }
     }
 
-    printf("Soma dos elementos da diagonal principal: %d\n", soma);
+    printf("Soma dos elementos da diagonal principal: %d\n", soma); //impressão da soma dos elementos
+    
+    free(matriz); //liberando a memória alocada
+
     return 0;
 }
